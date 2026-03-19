@@ -352,7 +352,7 @@ async def unexpected(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-async def main():
+def main():
     if not ADMIN_CHANNEL_ID:
         logger.warning("⚠️  ADMIN_CHANNEL_ID non configuré dans config.py — les notifications admin ne seront pas envoyées.")
 
@@ -394,9 +394,8 @@ async def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, unexpected))
 
     logger.info("🚗 Meeshi Bot démarré !")
-    await app.run_polling(drop_pending_updates=True)
+    app.run_polling(drop_pending_updates=True)
 
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    main()
